@@ -1,0 +1,340 @@
+{% block css %}
+{% load humanize %}
+
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+	button {
+		--color: rgb(237, 28, 36);
+		font-family: inherit;
+		display: inline-block;
+		width: 8em;
+		height: 2.6em;
+		line-height: 2.5em;
+		margin: 20px;
+		position: relative;
+		overflow: hidden;
+		border: 2px solid var(--color) !important;
+		transition: color .5s;
+		z-index: 1;
+		font-size: 17px;
+		border-radius: 6px;
+		font-weight: 500;
+		color: var(--color);
+		font-family: "Roboto", sans-serif;
+		letter-spacing: 1px;
+	}
+
+	.link:before {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		background: var(--color);
+		height: 150px;
+		width: 200px;
+		border-radius: 50%;
+	}
+
+	.link:hover {
+		color: #fff;
+	}
+
+	.link:before {
+		top: 100%;
+		left: 100%;
+		transition: all .7s;
+	}
+
+	.link:hover:before {
+		top: -30px;
+		left: -30px;
+	}
+
+	.link:active:before {
+		background: #3a0ca3;
+		transition: background 0s;
+	}
+
+	nav {
+		margin-left: 25%;
+	}
+</style>
+{% endblock css %}
+<div class="site_container">
+	<!--<div class="header_top_bar_container style_2 clearfix">
+			<div class="header_top_bar_container style_2 border clearfix">
+			<div class="header_top_bar_container style_3 clearfix">
+			<div class="header_top_bar_container style_3 border clearfix">
+			<div class="header_top_bar_container style_4 clearfix">
+			<div class="header_top_bar_container style_4 border clearfix">
+			<div class="header_top_bar_container style_5 clearfix">
+			<div class="header_top_bar_container style_5 border clearfix"> -->
+	<div class="header_top_bar_container clearfix">
+		<div class="header_top_bar">
+			<form class="search"  method="GET">
+                <input type="text" name="q" placeholder="Search..." value="{{ query }}" class="search_input hint">
+                <input type="submit" class="search_submit" value="">
+            </form>
+			<!--<ul class="social_icons dark clearfix">
+					<ul class="social_icons colors clearfix">-->
+			<ul class="social_icons clearfix">
+				<li>
+					<a target="_blank" href="https://facebook.com/QuanticaLabs" class="social_icon facebook"
+						title="facebook">
+						&nbsp;
+					</a>
+				</li>
+				<li>
+					<a target="_blank" href="https://twitter.com/QuanticaLabs" class="social_icon twitter"
+						title="twitter">
+						&nbsp;
+					</a>
+				</li>
+				<li>
+					<a href="mailto:contact@pressroom.com" class="social_icon mail" title="mail">
+						&nbsp;
+					</a>
+				</li>
+				<li>
+					<a href="https://1.envato.market/quanticalabs-portfolio" class="social_icon envato" title="envato">
+						&nbsp;
+					</a>
+				</li>
+			</ul>
+			<div class="latest_news_scrolling_list_container">
+				<ul>
+					<li class="category">LATEST</li>
+					<li class="left"><a href="#"></a></li>
+					<li class="right"><a href="#"></a></li>
+					<li class="posts">
+						<ul class="latest_news_scrolling_list">
+							{% for i in slider %}
+							<li>
+								<a href="post.html" title="">{{i.news_title}}</a>
+								<span>{{ i.created_at|naturaltime }}</span>
+							</li>
+							{% endfor %}
+						</ul>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!--<div class="header_container small">
+			<div class="header_container style_2">
+			<div class="header_container style_2 small">
+			<div class="header_container style_3">
+			<div class="header_container style_3 small">-->
+	<div class="header_container">
+		<div class="header clearfix">
+			<div class="logo">
+				<h1><a href="{% url 'home' %}" title="Pressroom">Haber</a></h1>
+				<h4>Haberlerin Akışında Kalın</h4>
+			</div>
+			<div class="placeholder">728 x 90</div>
+		</div>
+	</div>
+	<!-- <div class="menu_container style_2 clearfix">
+			<div class="menu_container style_3 clearfix">
+			<div class="menu_container style_... clearfix">
+			<div class="menu_container style_10 clearfix">
+			<div class="menu_container sticky clearfix">-->
+	<div class="menu_container clearfix">
+
+		<nav>
+			<ul class="sf-menu">
+				<li class="submenu selected">
+					<a href="{% url 'home' %}" title="Home">
+						Home
+					</a>
+					<ul>
+
+						<li class="selected">
+							<a href="{% url 'home' %}" title="Home Style 5">
+								Home
+							</a>
+						</li>
+
+					</ul>
+				</li>
+
+
+
+				<li class="submenu">
+					<a href="{% url 'blog' %}" title="Blog">
+						Blog
+					</a>
+					<ul>
+
+						<li>
+							<a href="{% url 'blog' %}" title="Blog 3 Columns">
+								Blog 3 Columns
+							</a>
+						</li>
+
+					</ul>
+				</li>
+				<li class="submenu">
+					<a href="{% url 'dashboard' %}" title="Blog">
+						dashboard
+					</a>
+					<ul>
+					</ul>
+				</li>
+				<li class="submenu">
+					<a href="{% url 'news_upload' %}" title="Blog">
+						news_upload
+					</a>
+					<ul>
+					</ul>
+				</li>
+				<li class="submenu">
+					<a href="{% url 'authors' %}" title="Authors">
+						Authors
+					</a>
+					<ul>
+						<li>
+							<a href="{% url 'authors' %}" title="Authors List">
+								Authors List
+							</a>
+						</li>
+
+					</ul>
+				</li>
+				<li class="submenu">
+					<a href="#" title="Categories">
+						Categories
+					</a>
+					<ul>
+											
+						<li>
+							<a href="{% url 'category' 'Dünya' %}">Dünya</a>
+						</li>
+
+						<li>
+							<a href="{% url 'category' 'Teknoloji' %}">Teknoloji</a>
+						</li>
+
+						<li>
+							<a href="{% url 'category' 'Ekonomi' %}">Ekonomi</a>
+						</li>
+						
+						<li>
+							<a href="{% url 'category' 'Siyasi' %}">Siyasi</a>
+						</li>
+							
+						
+							
+					</ul>
+				</li>
+
+				<!-- <li class="submenu">
+					<a href="contact.html" title="Contact">
+						&nbsp;
+					</a>
+				</li>
+				<li class="submenu">
+					<a href="contact.html" title="Contact">
+						&nbsp;
+					</a>
+				</li> -->
+				{% if user.is_authenticated %}
+				{% if user.authors.exists %}
+				<li class="submenu">
+					<a href="{% url 'profile' user.authors.first.slug %}">{{ request.user }}</a>
+				</li>
+				{% elif user.readers.exists %}
+				<li class="submenu">
+					<a href="">{{ request.user }}</a>
+				</li>
+				{% endif %}
+				{% endif %}
+
+				{% if user.is_authenticated %}
+
+				<li class="submenu">
+					<a href="{% url 'logout' %}">Çıkış Yap</a>
+				</li>
+				{% else %}
+				<li class="submenu">
+					<a href="{% url 'register' %}" title="Contact Style 2">
+						Kayıt OL
+					</a>
+				</li>
+				<li class="submenu">
+					<a href="{% url 'login' %}" title="Contact Style 2">
+						Giriş Yap
+					</a>
+				</li>
+				{% endif %}
+
+			</ul>
+		</nav>
+		<div class="mobile_menu_container">
+			<a href="#" class="mobile-menu-switch">
+				<span class="line"></span>
+				<span class="line"></span>
+				<span class="line"></span>
+			</a>
+			<div class="mobile-menu-divider"></div>
+			<nav>
+				<ul class="mobile-menu">
+					<li class="submenu selected">
+						<a href="{% url 'home' %}" title="Home">
+							Home
+						</a>
+						<ul>
+
+							<li class="selected">
+								<a href="{% url 'home' %}" title="Home">
+									Home
+								</a>
+							</li>
+
+						</ul>
+					</li>
+
+
+					<li class="submenu">
+						<a href="{% url 'blog' %}" title="Blog">
+							Blog
+						</a>
+						<ul>
+
+							<li>
+								<a href="{% url 'blog' %}" title="Blog 3 Columns">
+									Blog
+								</a>
+							</li>
+
+
+
+						</ul>
+					</li>
+					<li class="submenu">
+						<a href="{% url 'authors' %}" title="Authors">
+							Authors
+						</a>
+						<ul>
+							<li>
+								<a href="{% url 'authors' %}" title="Authors List">
+									Authors List
+								</a>
+							</li>
+
+						</ul>
+					</li>
+					<li class="submenu">
+						<a href="#" title="Categories">
+							Categories
+						</a>
+						<ul>
+
+						</ul>
+					</li>
+
+				</ul>
+			</nav>
+		</div>
+	</div>

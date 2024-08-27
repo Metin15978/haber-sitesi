@@ -1,0 +1,170 @@
+{% extends 'main/base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+	<title>Pressroom - Responsive News &amp; Magazine Template</title>
+	<!--meta-->
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.2" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="keywords" content="Medic, Medical Center" />
+	<meta name="description" content="Responsive Medical Health Template" />
+	<!--style-->
+
+
+	{% block css %}
+	<style>
+		#categoriler {
+			display: flex;
+			width: 775px;
+			height: 245px;
+
+		}
+	</style>
+
+	{% endblock css %}
+
+	<!--<link rel="stylesheet" type="text/css" href="style/dark_skin.css">-->
+	<!--<link rel="stylesheet" type="text/css" href="style/high_contrast_skin.css">-->
+	<link rel="shortcut icon" href="images/favicon.ico">
+</head>
+<!--<body class="image_1">
+	<body class="image_1 overlay">
+	<body class="image_2">
+	<body class="image_2 overlay">
+	<body class="image_3">
+	<body class="image_3 overlay">
+	<body class="image_4">
+	<body class="image_4 overlay">
+	<body class="image_5">
+	<body class="image_5 overlay">
+	<body class="pattern_1">
+	<body class="pattern_2">
+	<body class="pattern_3">
+	<body class="pattern_4">
+	<body class="pattern_5">
+	<body class="pattern_6">
+	<body class="pattern_7">
+	<body class="pattern_8">
+	<body class="pattern_9">
+	<body class="pattern_10">-->
+
+<body>
+
+	{% block content %}
+
+	<div class="page">
+		<div class="page_header clearfix page_margin_top">
+			<div class="page_header_left">
+				<h1 class="page_title">Latest Posts</h1>
+			</div>
+			<div class="page_header_right">
+				<ul class="bread_crumb">
+					<li>
+						<a title="Home" href="{% url 'home' %}">
+							Home
+						</a>
+					</li>
+					<li class="separator icon_small_arrow right_gray">
+						&nbsp;
+					</li>
+					<li>
+						latest posts
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="page_layout clearfix">
+			<div class="divider_block clearfix">
+				<hr class="divider first">
+				<hr class="divider subheader_arrow">
+				<hr class="divider last">
+			</div>
+			<div class="row">
+				<ul class="blog column column_1_3">
+
+					{% for i in latest_posts1 %}
+					<li class="post" id="categoriler">
+						<div>
+							<a href="{% url 'details' i.slug %}" title="{{i.news_title}}">
+								<img style="width: 330px; height: 245px;" src='{{i.news_image.url}}' alt='img'>
+							</a>
+						</div>
+						<div class="post_content" style="padding-left: 25px;display: inline;">
+							<div class="with_number">
+								<div>
+									<a href="{% url 'details' i.slug %}"
+										title="Built on Brotherhood, Club Lives Up to Name">
+										<h3><b>{{i.news_title}}</b></h3>
+									</a>
+								</div>
+
+							</div>
+							<ul class="post_details">
+								<li class="category"><a href="{% url 'category' i.category %}" title="WORLD">{{ i.category }}</a></li>
+								<li class="date">
+									{{ i.created_at }}
+								</li>
+							</ul>
+							<p>{{ i.news_front|truncatechars:100 }}</p>
+							<a class="read_more" href="{% url 'details' i.slug %}" title="Read more"><span
+									class="arrow"></span><span>READ MORE</span></a>
+							<div>
+								<div>
+									<a class="comments_number" href="#" title="2 comments">2 tane yorum yapıldı<span
+											class="arrow_comments"></span></a>
+								</div>
+							</div>
+						</div>
+					</li>
+					{% endfor %}
+
+
+
+				</ul>
+
+			</div>
+			<div class="pagination">
+				<ul class="pagination-list">
+					{% if blog.has_previous %}
+						<li class="pagination-item">
+							<a href="?page=1" class="pagination-link">&laquo; İlk</a>
+						</li>
+						<li class="pagination-item">
+							<a href="?page={{ blog.previous_page_number }}" class="pagination-link">Önceki</a>
+						</li>
+					{% endif %}
+					
+					<li class="pagination-item">
+						<span style="display: inline-block; padding: 8px 12px; border: 1px solid #ccc; background-color: #f0f0f0; color: black; font-weight: bold;" class="pagination-link current-page">
+							Sayfa {{ blog.number }} / {{ blog.paginator.num_pages }}
+						</span>
+					</li>
+					
+					{% if blog.has_next %}
+						<li class="pagination-item">
+							<a href="?page={{ blog.next_page_number }}" class="pagination-link">Sonraki</a>
+						</li>
+						<li class="pagination-item">
+							<a href="?page={{ blog.paginator.num_pages }}" class="pagination-link">Son &raquo;</a>
+						</li>
+					{% endif %}
+				</ul>
+			</div>
+
+
+		</div>
+	</div>
+	{% endblock content %}
+
+
+	<!--js-->
+
+
+	{% block js %}{% endblock js %}
+
+</body>
+
+</html>

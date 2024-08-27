@@ -1,0 +1,108 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Yazar Dashboard{% endblock %}
+
+{% block css %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 2.5em;
+        color: #333;
+    }
+
+    .news-section {
+        margin-top: 30px;
+    }
+
+    .news-section h2 {
+        font-size: 2em;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .news-section table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    .news-section th, .news-section td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .news-section th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+    .news-section th a{
+        color: #333;
+    }
+
+    .news-section tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .news-section td {
+        background-color: #fff;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header>
+        <h1>Yazar Dashboard</h1>
+    </header>
+    <section class="news-section">
+        <h2>Haberleriniz</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Haber Başlığı</th>
+                    <th>Toplam Görüntülenme Sayısı:{{ total_view_count }}</th>
+                    <th>Toplam Yorum Sayısı:{{ total_comment_count }}</th>
+                </tr>
+            </thead>
+            <thead>
+                {% for i in dashboard_with_comment_counts %}
+                <tr>
+                    <th><a href="{% url 'details' i.news.slug %}">{{ i.news.news_title }}</a> </th>
+                    <th>Görüntülenme Sayısı: {{ i.news.view_count }}</th>
+                    <th>Toplam Etkileşimler: {{ i.comment_count }}</th>
+                </tr>
+                {% endfor %}
+            </thead>
+        </table>
+    </section>
+</div>
+{% endblock %}
+
+{% block js %}
+<!-- Ekstra JS kodlarınızı buraya ekleyebilirsiniz -->
+{% endblock %}
+
+

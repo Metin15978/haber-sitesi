@@ -1,0 +1,13 @@
+{% if user.is_authenticated %}
+  {% if user.authors.exists %}
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Submit</button>
+    </form>
+  {% else %}
+    <p>Sadece yazarlar haber yükleyebilir.</p>
+  {% endif %}
+{% else %}
+  <p>Sadece yazarlar haber yükleyebilir. Lütfen <a href="{% url 'login' %}">giriş yapın</a>.</p>
+{% endif %}

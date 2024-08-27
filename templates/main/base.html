@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %}{% endblock %} | Haber Sitesi</title>
+
+	{% block css %}{% endblock css %}
+	
+	<link rel="stylesheet" href="{% static 'main/css/reset.css' %}">
+	<link rel="stylesheet" href="{% static 'main/css/superfish.css' %}">
+	<link rel="stylesheet" href="{% static 'main/css/prettyPhoto.css' %}">
+	<link rel="stylesheet" href="{% static 'main/css/jquery.qtip.css' %}">
+	<link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'main/css/menu_styles.css' %}">
+	<link rel="stylesheet" href="{% static 'main/css/animations.css' %}">
+	<link rel="stylesheet" href="{% static 'main/css/responsive.css' %}">
+	<link rel="stylesheet" href="{% static 'main/css/odometer-theme-default.css' %}">
+	
+</head>
+
+<style>
+	::-webkit-scrollbar {
+		background-color: transparent;
+		width: 8px;
+
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: rgb(237, 28, 36);
+		border-radius: 10px;
+	}
+
+	body {
+		overflow-x: hidden;
+	}
+</style>
+<body>
+
+	{% include 'main/partials/__navbar.html' %}
+
+	{% block content %}{% endblock content %}
+
+	{% include 'main/partials/__footer.html' %}
+
+
+	{% block js %}{% endblock js %}
+
+	<script src="{% static 'main/js/jquery-3.6.0.min.js' %}"></script>
+	<script src="{% static 'main/js/jquery.ba-bbq.min.js' %}"></script>
+	<script src="{% static 'main/js/jquery-ui-1.12.1.custom.min.js' %}"></script>
+	<script src="{% static 'main/js/jquery.easing.1.4.1.min.js' %}"></script>
+	<script src="{% static 'main/js/jquery.carouFredSel-6.2.1-packed.js' %}"></script>
+	<script src="{% static 'main/js/jquery.touchSwipe.min.js' %}"></script>
+	<script src="{% static 'main/js/jquery.transit.min.js' %}"></script>
+	<script src="{% static 'main/js/jquery.sliderControl.js' %}"></script>
+	<script src="{% static 'main/js/jquery.timeago.js' %}"></script>
+	<script src="{% static 'main/js/jquery.hint.js' %}"></script>
+	<script src="{% static 'main/js/jquery.prettyPhoto.js' %}"></script>
+	<script src="{% static 'main/js/jquery.qtip.min.js' %}"></script>
+	<script src="{% static 'main/js/jquery.blockUI.js' %}"></script>
+	<script src="{% static 'main/js/jquery.imagesloaded-packed.js' %}"></script>
+	<script src="{% static 'main/js/main.js' %}"></script>
+	<script src="{% static 'main/js/odometer.min.js' %}"></script>
+</body>
+
+</html>

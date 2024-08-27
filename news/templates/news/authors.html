@@ -1,0 +1,654 @@
+{% extends 'main/base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+	<title>Pressroom - Responsive News &amp; Magazine Template</title>
+	<!--meta-->
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.2" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="keywords" content="Medic, Medical Center" />
+	<meta name="description" content="Responsive Medical Health Template" />
+	<!--style-->
+
+
+	{% block css %}{% endblock css %}
+
+	<!--<link rel="stylesheet" type="text/css" href="style/dark_skin.css">-->
+	<!--<link rel="stylesheet" type="text/css" href="style/high_contrast_skin.css">-->
+	<link rel="shortcut icon" href="images/favicon.ico">
+</head>
+<!--<body class="image_1">
+	<body class="image_1 overlay">
+	<body class="image_2">
+	<body class="image_2 overlay">
+	<body class="image_3">
+	<body class="image_3 overlay">
+	<body class="image_4">
+	<body class="image_4 overlay">
+	<body class="image_5">
+	<body class="image_5 overlay">
+	<body class="pattern_1">
+	<body class="pattern_2">
+	<body class="pattern_3">
+	<body class="pattern_4">
+	<body class="pattern_5">
+	<body class="pattern_6">
+	<body class="pattern_7">
+	<body class="pattern_8">
+	<body class="pattern_9">
+	<body class="pattern_10">-->
+
+<body>
+
+
+	{% block content %}
+
+	<div class="page">
+		<div class="page_header clearfix page_margin_top">
+			<div class="page_header_left">
+				<h1 class="page_title">Authors</h1>
+			</div>
+			<div class="page_header_right">
+				<ul class="bread_crumb">
+					<li>
+						<a title="Home" href="{% url 'home' %}">
+							Home
+						</a>
+					</li>
+					<li class="separator icon_small_arrow right_gray">
+						&nbsp;
+					</li>
+					<li>
+						Authors
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="page_layout clearfix">
+			<div class="divider_block clearfix">
+				<hr class="divider first">
+				<hr class="divider subheader_arrow">
+				<hr class="divider last">
+			</div>
+			<div class="row page_margin_top">
+				<div class="row page_margin_top">
+					<div class="column column_2_3">
+						<div class="row">
+							<ul class="authors_list rating">
+								{% for author in authors %}
+								<li class="author clearfix">
+									<div class="avatar_block">
+										<a href="author.html" title="Debora Hilton">
+											<img src='images/samples/Team_330x242/image_01.jpg' alt='img'>
+										</a>
+										<div class="details clearfix">
+											<ul class="columns">
+												<li class="column">
+													<span class="number animated_element" data-value="34"></span>
+													<h5>{{author.role }}</h5>
+												</li>
+												<li class="column">
+													<span class="number animated_element" data-value="24 231"></span>
+													<h5>Views</h5>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="content">
+										<ul class="social_icons clearfix">
+											<li>
+												<a target="_blank" title="" href="https://facebook.com/QuanticaLabs"
+													class="social_icon facebook">
+													&nbsp;
+												</a>
+											</li>
+											<li>
+												<a target="_blank" title="" href="https://twitter.com/QuanticaLabs"
+													class="social_icon twitter">
+													&nbsp;
+												</a>
+											</li>
+											<li>
+												<a title="" href="#" class="social_icon skype">
+													&nbsp;
+												</a>
+											</li>
+										</ul>
+										<h6>EDITOR</h6>
+										<h2><a href="author.html" title="Debora Hilton">{{author.user.first_name }}
+												{{author.user.last_name }}</a></h2>
+										<p>author modeline about açıp doldurduğunuz zaman buraya çekebilirsiniz.</p>
+										<a href="{% if author.user.authors.first.slug %}{% url 'profile' author.user.authors.first.slug %}{% endif %}"
+											class="more highlight margin_top_15">PROFILE</a>
+									</div>
+								</li>
+								{% endfor %}
+							</ul>
+							<!-- Sayfalama bağlantıları -->
+							<div class="pagination">
+								<ul class="pagination-list">
+									{% if authors.has_previous %}
+										<li class="pagination-item">
+											<a href="?page=1" class="pagination-link">&laquo; İlk</a>
+										</li>
+										<li class="pagination-item">
+											<a href="?page={{ authors.previous_page_number }}" class="pagination-link">Önceki</a>
+										</li>
+									{% endif %}
+									
+									<li class="pagination-item">
+										<span style="display: inline-block; padding: 8px 12px; border: 1px solid #ccc; background-color: #f0f0f0; color: black; font-weight: bold;" class="pagination-link current-page">
+											Sayfa {{ authors.number }} / {{ authors.paginator.num_pages }}
+										</span>
+									</li>
+									
+									{% if authors.has_next %}
+										<li class="pagination-item">
+											<a href="?page={{ authors.next_page_number }}" class="pagination-link">Sonraki</a>
+										</li>
+										<li class="pagination-item">
+											<a href="?page={{ authors.paginator.num_pages }}" class="pagination-link">Son &raquo;</a>
+										</li>
+									{% endif %}
+								</ul>
+							</div>
+														
+							 
+						</div>
+					</div>
+					<div class="column column_1_3">
+						<div class="tabs no_scroll clearfix">
+							<ul class="tabs_navigation clearfix">
+								<li>
+									<a href="#sidebar-most-read" title="Most Read">
+										Most Read
+									</a>
+									<span></span>
+								</li>
+								<li>
+									<a href="#sidebar-most-commented" title="Commented">
+										Commented
+									</a>
+									<span></span>
+								</li>
+							</ul>
+							<div id="sidebar-most-read">
+								<ul class="blog rating page_margin_top clearfix">
+									<li class="post">
+										<a href="post.html" title="Nuclear Fusion Closer to Becoming a Reality">
+											<img src='images/samples/510x187/image_12.jpg' alt='img'>
+										</a>
+										<div class="post_content">
+											<span class="number animated_element" data-value="6 257"></span>
+											<h5><a href="post.html"
+													title="New Painkiller Rekindles Addiction Concerns">New
+													Painkiller Rekindles Addiction Concerns</a></h5>
+											<ul class="post_details simple">
+												<li class="category"><a href="category_health.html"
+														title="HEALTH">HEALTH</a></li>
+											</ul>
+										</div>
+									</li>
+									<li class="post">
+										<div class="post_content">
+											<span class="number animated_element" data-value="5 062"></span>
+											<h5><a href="post.html"
+													title="New Painkiller Rekindles Addiction Concerns">New
+													Painkiller Rekindles Addiction Concerns</a></h5>
+											<ul class="post_details simple">
+												<li class="category"><a href="category_world.html"
+														title="WORLD">WORLD</a>
+												</li>
+											</ul>
+										</div>
+									</li>
+									<li class="post">
+										<div class="post_content">
+											<span class="number animated_element" data-value="4 778"></span>
+											<h5><a href="post.html"
+													title="Seeking the Right Chemistry, Drug Makers Hunt for Mergers">Seeking
+													the Right Chemistry, Drug Makers Hunt for Mergers</a></h5>
+											<ul class="post_details simple">
+												<li class="category"><a href="category_sports.html"
+														title="SPORTS">SPORTS</a></li>
+											</ul>
+										</div>
+									</li>
+									<li class="post">
+										<div class="post_content">
+											<span class="number animated_element" data-value="754"></span>
+											<h5><a href="post.html"
+													title="Study Linking Illnes and Salt Leaves Researchers Doubtful">Study
+													Linking Illnes and Salt Leaves Researchers Doubtful</a></h5>
+											<ul class="post_details simple">
+												<li class="category"><a href="category_science.html"
+														title="SCIENCE">SCIENCE</a></li>
+											</ul>
+										</div>
+									</li>
+									<li class="post">
+										<div class="post_content">
+											<span class="number animated_element" data-value="52"></span>
+											<h5><a href="post_small_image.html"
+													title="Syrian Civilians Trapped for Months Continue to be Evacuated">Syrian
+													Civilians Trapped for Months Continue to be Evacuated</a></h5>
+											<ul class="post_details simple">
+												<li class="category"><a href="category_science.html"
+														title="SCIENCE">SCIENCE</a></li>
+											</ul>
+										</div>
+									</li>
+								</ul>
+								<a class="more page_margin_top" href="#">SHOW MORE</a>
+							</div>
+							<div id="sidebar-most-commented">
+								<ul class="blog rating page_margin_top clearfix">
+									<li class="post">
+										<a href="post.html" title="Nuclear Fusion Closer to Becoming a Reality">
+											<img src='images/samples/510x187/image_02.jpg' alt='img'>
+										</a>
+										<div class="post_content">
+											<span class="number animated_element" data-value="70"></span>
+											<h5><a href="post.html"
+													title="New Painkiller Rekindles Addiction Concerns">New
+													Painkiller Rekindles Addiction Concerns</a></h5>
+											<ul class="post_details simple">
+												<li class="category"><a href="category_health.html"
+														title="HEALTH">HEALTH</a></li>
+											</ul>
+										</div>
+									</li>
+									<li class="post">
+										<div class="post_content">
+											<span class="number animated_element" data-value="62"></span>
+											<h5><a href="post_quote.html"
+													title="New Painkiller Rekindles Addiction Concerns">New Painkiller
+													Rekindles Addiction Concerns</a></h5>
+											<ul class="post_details simple">
+												<li class="category"><a href="category_world.html"
+														title="WORLD">WORLD</a>
+												</li>
+											</ul>
+										</div>
+									</li>
+									<li class="post">
+										<div class="post_content">
+											<span class="number animated_element" data-value="30"></span>
+											<h5><a href="post.html"
+													title="Seeking the Right Chemistry, Drug Makers Hunt for Mergers">Seeking
+													the Right Chemistry, Drug Makers Hunt for Mergers</a></h5>
+											<ul class="post_details simple">
+												<li class="category"><a href="category_sports.html"
+														title="SPORTS">SPORTS</a></li>
+											</ul>
+										</div>
+									</li>
+									<li class="post">
+										<div class="post_content">
+											<span class="number animated_element" data-value="25"></span>
+											<h5><a href="post.html"
+													title="Study Linking Illnes and Salt Leaves Researchers Doubtful">Study
+													Linking Illnes and Salt Leaves Researchers Doubtful</a></h5>
+											<ul class="post_details simple">
+												<li class="category"><a href="category_science.html"
+														title="SCIENCE">SCIENCE</a></li>
+											</ul>
+										</div>
+									</li>
+									<li class="post">
+										<div class="post_content">
+											<span class="number animated_element" data-value="4"></span>
+											<h5><a href="post_soundcloud.html"
+													title="Syrian Civilians Trapped for Months Continue to be Evacuated">Syrian
+													Civilians Trapped for Months Continue to be Evacuated</a></h5>
+											<ul class="post_details simple">
+												<li class="category"><a href="category_science.html"
+														title="SCIENCE">SCIENCE</a></li>
+											</ul>
+										</div>
+									</li>
+								</ul>
+								<a class="more page_margin_top" href="#">SHOW MORE</a>
+							</div>
+						</div>
+						<h4 class="box_header page_margin_top_section">Latest Posts</h4>
+						<div class="vertical_carousel_container clearfix">
+							<ul
+								class="blog small vertical_carousel autoplay-1 scroll-1 navigation-1 easing-easeInOutQuint duration-750">
+								<li class="post">
+									<a href="post_gallery.html"
+										title="Study Linking Illnes and Salt Leaves Researchers Doubtful">
+										<span class="icon small gallery"></span>
+										<img src='images/samples/100x100/image_06.jpg' alt='img'>
+									</a>
+									<div class="post_content">
+										<h5>
+											<a href="post_gallery.html"
+												title="Study Linking Illnes and Salt Leaves Researchers Doubtful">Study
+												Linking Illnes and Salt Leaves Researchers Doubtful</a>
+										</h5>
+										<ul class="post_details simple">
+											<li class="category"><a href="category_health.html"
+													title="HEALTH">HEALTH</a>
+											</li>
+											<li class="date">
+												10:11 PM, Feb 02
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li class="post">
+									<a href="post_small_image.html"
+										title="Syrian Civilians Trapped For Months Continue To Be Evacuated">
+										<img src='images/samples/100x100/image_12.jpg' alt='img'>
+									</a>
+									<div class="post_content">
+										<h5>
+											<a href="post_small_image.html"
+												title="Syrian Civilians Trapped For Months Continue To Be Evacuated">Syrian
+												Civilians Trapped For Months Continue To Be Evacuated</a>
+										</h5>
+										<ul class="post_details simple">
+											<li class="category"><a href="category_world.html" title="WORLD">WORLD</a>
+											</li>
+											<li class="date">
+												10:11 PM, Feb 02
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li class="post">
+									<a href="post_quote.html" title="Built on Brotherhood, Club Lives Up to Name">
+										<img src='images/samples/100x100/image_02.jpg' alt='img'>
+									</a>
+									<div class="post_content">
+										<h5>
+											<a href="post_quote.html"
+												title="Built on Brotherhood, Club Lives Up to Name">Built on
+												Brotherhood,
+												Club Lives Up to Name</a>
+										</h5>
+										<ul class="post_details simple">
+											<li class="category"><a href="category_sports.html"
+													title="SPORTS">SPORTS</a>
+											</li>
+											<li class="date">
+												10:11 PM, Feb 02
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li class="post">
+									<a href="post.html" title="Nuclear Fusion Closer to Becoming a Reality">
+										<img src='images/samples/100x100/image_13.jpg' alt='img'>
+									</a>
+									<div class="post_content">
+										<h5>
+											<a href="post.html"
+												title="Nuclear Fusion Closer to Becoming a Reality">Nuclear
+												Fusion Closer to Becoming a Reality</a>
+										</h5>
+										<ul class="post_details simple">
+											<li class="category"><a href="category_science.html"
+													title="SCIENCE">SCIENCE</a>
+											</li>
+											<li class="date">
+												10:11 PM, Feb 02
+											</li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="column column_1_3">
+					<div class="tabs no_scroll clearfix">
+						<ul class="tabs_navigation clearfix">
+							<li>
+								<a href="#sidebar-most-read" title="Most Read">
+									Most Read
+								</a>
+								<span></span>
+							</li>
+							<li>
+								<a href="#sidebar-most-commented" title="Commented">
+									Commented
+								</a>
+								<span></span>
+							</li>
+						</ul>
+						<div id="sidebar-most-read">
+							<ul class="blog rating page_margin_top clearfix">
+								<li class="post">
+									<a href="post.html" title="Nuclear Fusion Closer to Becoming a Reality">
+										<img src='images/samples/510x187/image_12.jpg' alt='img'>
+									</a>
+									<div class="post_content">
+										<span class="number animated_element" data-value="6 257"></span>
+										<h5><a href="post.html" title="New Painkiller Rekindles Addiction Concerns">New
+												Painkiller Rekindles Addiction Concerns</a></h5>
+										<ul class="post_details simple">
+											<li class="category"><a href="category_health.html"
+													title="HEALTH">HEALTH</a></li>
+										</ul>
+									</div>
+								</li>
+								<li class="post">
+									<div class="post_content">
+										<span class="number animated_element" data-value="5 062"></span>
+										<h5><a href="post.html" title="New Painkiller Rekindles Addiction Concerns">New
+												Painkiller Rekindles Addiction Concerns</a></h5>
+										<ul class="post_details simple">
+											<li class="category"><a href="category_world.html" title="WORLD">WORLD</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li class="post">
+									<div class="post_content">
+										<span class="number animated_element" data-value="4 778"></span>
+										<h5><a href="post.html"
+												title="Seeking the Right Chemistry, Drug Makers Hunt for Mergers">Seeking
+												the Right Chemistry, Drug Makers Hunt for Mergers</a></h5>
+										<ul class="post_details simple">
+											<li class="category"><a href="category_sports.html"
+													title="SPORTS">SPORTS</a></li>
+										</ul>
+									</div>
+								</li>
+								<li class="post">
+									<div class="post_content">
+										<span class="number animated_element" data-value="754"></span>
+										<h5><a href="post.html"
+												title="Study Linking Illnes and Salt Leaves Researchers Doubtful">Study
+												Linking Illnes and Salt Leaves Researchers Doubtful</a></h5>
+										<ul class="post_details simple">
+											<li class="category"><a href="category_science.html"
+													title="SCIENCE">SCIENCE</a></li>
+										</ul>
+									</div>
+								</li>
+								<li class="post">
+									<div class="post_content">
+										<span class="number animated_element" data-value="52"></span>
+										<h5><a href="post_small_image.html"
+												title="Syrian Civilians Trapped for Months Continue to be Evacuated">Syrian
+												Civilians Trapped for Months Continue to be Evacuated</a></h5>
+										<ul class="post_details simple">
+											<li class="category"><a href="category_science.html"
+													title="SCIENCE">SCIENCE</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+							<a class="more page_margin_top" href="#">SHOW MORE</a>
+						</div>
+						<div id="sidebar-most-commented">
+							<ul class="blog rating page_margin_top clearfix">
+								<li class="post">
+									<a href="post.html" title="Nuclear Fusion Closer to Becoming a Reality">
+										<img src='images/samples/510x187/image_02.jpg' alt='img'>
+									</a>
+									<div class="post_content">
+										<span class="number animated_element" data-value="70"></span>
+										<h5><a href="post.html" title="New Painkiller Rekindles Addiction Concerns">New
+												Painkiller Rekindles Addiction Concerns</a></h5>
+										<ul class="post_details simple">
+											<li class="category"><a href="category_health.html"
+													title="HEALTH">HEALTH</a></li>
+										</ul>
+									</div>
+								</li>
+								<li class="post">
+									<div class="post_content">
+										<span class="number animated_element" data-value="62"></span>
+										<h5><a href="post_quote.html"
+												title="New Painkiller Rekindles Addiction Concerns">New Painkiller
+												Rekindles Addiction Concerns</a></h5>
+										<ul class="post_details simple">
+											<li class="category"><a href="category_world.html" title="WORLD">WORLD</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li class="post">
+									<div class="post_content">
+										<span class="number animated_element" data-value="30"></span>
+										<h5><a href="post.html"
+												title="Seeking the Right Chemistry, Drug Makers Hunt for Mergers">Seeking
+												the Right Chemistry, Drug Makers Hunt for Mergers</a></h5>
+										<ul class="post_details simple">
+											<li class="category"><a href="category_sports.html"
+													title="SPORTS">SPORTS</a></li>
+										</ul>
+									</div>
+								</li>
+								<li class="post">
+									<div class="post_content">
+										<span class="number animated_element" data-value="25"></span>
+										<h5><a href="post.html"
+												title="Study Linking Illnes and Salt Leaves Researchers Doubtful">Study
+												Linking Illnes and Salt Leaves Researchers Doubtful</a></h5>
+										<ul class="post_details simple">
+											<li class="category"><a href="category_science.html"
+													title="SCIENCE">SCIENCE</a></li>
+										</ul>
+									</div>
+								</li>
+								<li class="post">
+									<div class="post_content">
+										<span class="number animated_element" data-value="4"></span>
+										<h5><a href="post_soundcloud.html"
+												title="Syrian Civilians Trapped for Months Continue to be Evacuated">Syrian
+												Civilians Trapped for Months Continue to be Evacuated</a></h5>
+										<ul class="post_details simple">
+											<li class="category"><a href="category_science.html"
+													title="SCIENCE">SCIENCE</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+							<a class="more page_margin_top" href="#">SHOW MORE</a>
+						</div>
+					</div>
+					<h4 class="box_header page_margin_top_section">Latest Posts</h4>
+					<div class="vertical_carousel_container clearfix">
+						<ul
+							class="blog small vertical_carousel autoplay-1 scroll-1 navigation-1 easing-easeInOutQuint duration-750">
+							<li class="post">
+								<a href="post_gallery.html"
+									title="Study Linking Illnes and Salt Leaves Researchers Doubtful">
+									<span class="icon small gallery"></span>
+									<img src='images/samples/100x100/image_06.jpg' alt='img'>
+								</a>
+								<div class="post_content">
+									<h5>
+										<a href="post_gallery.html"
+											title="Study Linking Illnes and Salt Leaves Researchers Doubtful">Study
+											Linking Illnes and Salt Leaves Researchers Doubtful</a>
+									</h5>
+									<ul class="post_details simple">
+										<li class="category"><a href="category_health.html" title="HEALTH">HEALTH</a>
+										</li>
+										<li class="date">
+											10:11 PM, Feb 02
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="post">
+								<a href="post_small_image.html"
+									title="Syrian Civilians Trapped For Months Continue To Be Evacuated">
+									<img src='images/samples/100x100/image_12.jpg' alt='img'>
+								</a>
+								<div class="post_content">
+									<h5>
+										<a href="post_small_image.html"
+											title="Syrian Civilians Trapped For Months Continue To Be Evacuated">Syrian
+											Civilians Trapped For Months Continue To Be Evacuated</a>
+									</h5>
+									<ul class="post_details simple">
+										<li class="category"><a href="category_world.html" title="WORLD">WORLD</a></li>
+										<li class="date">
+											10:11 PM, Feb 02
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="post">
+								<a href="post_quote.html" title="Built on Brotherhood, Club Lives Up to Name">
+									<img src='images/samples/100x100/image_02.jpg' alt='img'>
+								</a>
+								<div class="post_content">
+									<h5>
+										<a href="post_quote.html"
+											title="Built on Brotherhood, Club Lives Up to Name">Built on Brotherhood,
+											Club Lives Up to Name</a>
+									</h5>
+									<ul class="post_details simple">
+										<li class="category"><a href="category_sports.html" title="SPORTS">SPORTS</a>
+										</li>
+										<li class="date">
+											10:11 PM, Feb 02
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="post">
+								<a href="post.html" title="Nuclear Fusion Closer to Becoming a Reality">
+									<img src='images/samples/100x100/image_13.jpg' alt='img'>
+								</a>
+								<div class="post_content">
+									<h5>
+										<a href="post.html" title="Nuclear Fusion Closer to Becoming a Reality">Nuclear
+											Fusion Closer to Becoming a Reality</a>
+									</h5>
+									<ul class="post_details simple">
+										<li class="category"><a href="category_science.html" title="SCIENCE">SCIENCE</a>
+										</li>
+										<li class="date">
+											10:11 PM, Feb 02
+										</li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endblock content %}
+
+	<!--js-->
+
+
+	{% block js %}{% endblock js %}
+
+</body>
+
+</html>
